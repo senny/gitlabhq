@@ -94,7 +94,7 @@
         %td= select_tag :project_access, options_for_select(Project.access_options), {class: "project-access-select chosen span3"}
 
       %tr
-        %td= submit_tag 'Add user to projects in group', class: "btn btn-primary"
+        %td= submit_tag 'Add user to projects in group', class: "btn btn-create"
         %td
           Read more about project permissions
           %strong= link_to "here", help_permissions_path, class: "vlink"
@@ -116,18 +116,5 @@
       .input
         = select_tag :project_ids, options_from_collection_for_select(@projects , :id, :name_with_namespace), multiple: true, data: {placeholder: 'Select projects'}, class: 'chosen span5'
     .form-actions
-      = submit_tag 'Add', class: "btn btn-primary"
-
-:javascript
-  $(function(){
-    var modal = $('.change-owner-holder');
-    $('.change-owner-link').bind("click", function(){
-      $(this).hide();
-      modal.show();
-    });
-    $('.change-owner-cancel-link').bind("click", function(){
-      modal.hide();
-      $('.change-owner-link').show();
-    })
-  })
+      = submit_tag 'Move projects', class: "btn btn-create"
 
