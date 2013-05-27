@@ -33,6 +33,32 @@ You should also check the sections below for your issue and follow the steps to 
 
 If you still need help visit our [Support Forum](https://groups.google.com/forum/#!forum/gitlabhq) or consult the [installation guide](https://github.com/gitlabhq/gitlabhq/blob/stable/doc/install/installation.md).
 
+### Could not read from remote repository
+
+**Error:** clone from ssh doesn't work 
+```
+The SSH path for my project doesn't work because it is missing the repositories directory.
+
+git@git.myserver.com:mygroup/proj1.git
+
+should be
+
+git@git.myserver.com:repositories/mygroup/proj1.git
+```
+**Problem:** Discribe in https://github.com/gitlabhq/gitlabhq/issues/3686, Your public key already in the server ~/.ssh/authorized_keys before you setup gitlab, the key for gitlab should be started with: 
+```
+command="/home/git/gitlab/apps/gitlab/gitlab-shell/bin/gitlab-shell key-2",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty
+```
+
+**Solution:** Remove the key not start with gitlab-shell in the server ~/.ssh/authorized_keys
+
+**Error:** clone from http doesn't work <br/>
+**Problem:**
+```
+git clone git.myserver.com:mygroup/proj1.git doesn't work
+```
+**Solution:** update gitlab nginx config: https://github.com/gitlabhq/gitlabhq/issues/3384#issuecomment-15457287
+
 ### SSH
 
 **Error:** `git clone git@localhost:gitolite-admin.git /tmp/gitolite-admin` failing <br/>
